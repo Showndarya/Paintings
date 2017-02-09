@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Paintings</string>
+    <string name="title_activity_intent_check">IntentCheck</string>
+    <string name="title_activity_craft">Craft</string>
+</resources>

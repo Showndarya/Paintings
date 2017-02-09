@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.mushu.testintents.MainActivity"
+    android:background="@drawable/b1">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:text="AMATURE PAINTINGS"
+        android:textColor="@color/blue"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="28sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:text="CRAFT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btncraft"
+        android:layout_marginTop="33dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="NATURE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/btnnature"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/btncraft"
+        android:layout_alignLeft="@+id/btncraft"
+        android:layout_alignStart="@+id/btncraft" />
+
+    <Button
+        android:text="ABSTRACT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnabst"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/btnnature"
+        android:layout_alignLeft="@+id/btnnature"
+        android:layout_alignStart="@+id/btnnature"
+        android:layout_marginTop="19dp" />
+
+    <Button
+        android:text="POTRAITS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/btnpot"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/btnabst"
+        android:layout_alignLeft="@+id/btnabst"
+        android:layout_alignStart="@+id/btnabst" />
+
+    <Button
+        android:text="DIVINE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btndivine"
+        android:layout_marginTop="19dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/btnpot"
+        android:layout_alignLeft="@+id/btnpot"
+        android:layout_alignStart="@+id/btnpot" />
+</RelativeLayout>
