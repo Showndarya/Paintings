@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,10 +23,29 @@ public class Potrait extends AppCompatActivity {
     private Integer images[] = {R.drawable.p1, R.drawable.p2, R.drawable.p3, R.drawable.p4, R.drawable.p5, R.drawable.p6, R.drawable.p7, R.drawable.p8,R.drawable.d9, R.drawable.p10, R.drawable.p11, R.drawable.p12};
     private int currImage = 0;
     Button like;
+    TextView likeText;
     AnimationDrawable animationDrawable;
     RelativeLayout relativeLayout;
-
     DatabaseReference databaseLikes;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final String id = Integer.toString(currImage);
+        databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Likes l = dataSnapshot.getValue(Likes.class);
+                int cnt = l.getLikes();
+                String lc = Integer.toString(cnt);
+                likeText.setText(lc);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +56,7 @@ public class Potrait extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(5000);
         animationDrawable.setExitFadeDuration(2000);
         like = (Button) findViewById(R.id.like);
+        likeText = (TextView) findViewById(R.id.likeText);
 
         initializeImageSwitcher();
         setInitialImage();
@@ -59,6 +80,8 @@ public class Potrait extends AppCompatActivity {
                         cnt = cnt + 1;
                         Likes likecnt = new Likes(cnt);
                         databaseLikes.child(id).setValue(likecnt);
+                        String lc = Integer.toString(cnt);
+                        likeText.setText(lc);
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -93,6 +116,20 @@ public class Potrait extends AppCompatActivity {
                 if (currImage == 12) {
                     currImage = 0;
                 }
+                final String id = Integer.toString(currImage);
+                databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Likes l = dataSnapshot.getValue(Likes.class);
+                        int cnt = l.getLikes();
+                        String lc = Integer.toString(cnt);
+                        likeText.setText(lc);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 setCurrentImage();
             }
         });

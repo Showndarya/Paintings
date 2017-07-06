@@ -9,13 +9,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.mushu.testintents.MainActivity"
-    android:background="@drawable/animation_list">
+    android:background="@drawable/animation_list"
+    android:theme="@style/AppTheme.NoActionBar">
 
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
 
     <Button
         android:text="DIVINE"

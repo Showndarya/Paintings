@@ -1,14 +1,15 @@
 package com.example.mushu.testintents;
 
 import android.graphics.drawable.AnimationDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,10 +23,31 @@ public class Abst extends AppCompatActivity {
     private Integer images[] = {R.drawable.a1, R.drawable.a2, R.drawable.a3,R.drawable.a4,R.drawable.a5};
     private int currImage = 0;
     Button like;
+    TextView likeText;
     AnimationDrawable animationDrawable;
     RelativeLayout relativeLayout;
 
     DatabaseReference databaseLikes;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final String id = Integer.toString(currImage);
+        databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Likes l = dataSnapshot.getValue(Likes.class);
+                int cnt = l.getLikes();
+                String lc = Integer.toString(cnt);
+                likeText.setText(lc);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +58,7 @@ public class Abst extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(2000);
 
         like = (Button) findViewById(R.id.like);
+        likeText = (TextView) findViewById(R.id.likeText);
 
         initializeImageSwitcher();
         setInitialImage();
@@ -44,6 +67,7 @@ public class Abst extends AppCompatActivity {
         databaseLikes = FirebaseDatabase.getInstance().getReference("abstlikes");
 
     }
+
 
     private void setLike(){
         like.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +82,8 @@ public class Abst extends AppCompatActivity {
                                 cnt = cnt + 1;
                                 Likes likecnt = new Likes(cnt);
                                 databaseLikes.child(id).setValue(likecnt);
+                                String lc = Integer.toString(cnt);
+                                likeText.setText(lc);
 
                     }
 
@@ -99,6 +125,20 @@ public class Abst extends AppCompatActivity {
                 if (currImage == 5) {
                     currImage = 0;
                 }
+                final String id = Integer.toString(currImage);
+                databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Likes l = dataSnapshot.getValue(Likes.class);
+                        int cnt = l.getLikes();
+                        String lc = Integer.toString(cnt);
+                        likeText.setText(lc);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 setCurrentImage();
             }
         });
@@ -112,7 +152,6 @@ public class Abst extends AppCompatActivity {
 
         final ImageSwitcher imageView = (ImageSwitcher) findViewById(R.id.imageSwitcher);
         imageView.setImageResource(images[currImage]);
-
     }
 
     @Override

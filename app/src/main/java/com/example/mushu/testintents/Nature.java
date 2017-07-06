@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,9 +23,29 @@ public class Nature extends AppCompatActivity {
     private Integer images[] = {R.drawable.n1, R.drawable.n2, R.drawable.n3, R.drawable.n4, R.drawable.n5, R.drawable.n6, R.drawable.n7, R.drawable.n8, R.drawable.n9, R.drawable.n10, R.drawable.n11, R.drawable.n121, R.drawable.n122, R.drawable.n13, R.drawable.n14, R.drawable.n15, R.drawable.n16};
     private int currImage = 0;
     Button like;
+    TextView likeText;
     AnimationDrawable animationDrawable;
     RelativeLayout relativeLayout;
     DatabaseReference databaseLikes;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final String id = Integer.toString(currImage);
+        databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Likes l = dataSnapshot.getValue(Likes.class);
+                int cnt = l.getLikes();
+                String lc = Integer.toString(cnt);
+                likeText.setText(lc);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +56,7 @@ public class Nature extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(5000);
         animationDrawable.setExitFadeDuration(2000);
         like = (Button) findViewById(R.id.like);
+        likeText = (TextView) findViewById(R.id.likeText);
 
         initializeImageSwitcher();
         setInitialImage();
@@ -58,6 +80,8 @@ public class Nature extends AppCompatActivity {
                         cnt = cnt + 1;
                         Likes likecnt = new Likes(cnt);
                         databaseLikes.child(id).setValue(likecnt);
+                        String lc = Integer.toString(cnt);
+                        likeText.setText(lc);
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -93,6 +117,20 @@ public class Nature extends AppCompatActivity {
                 if (currImage == 17) {
                     currImage = 0;
                 }
+                final String id = Integer.toString(currImage);
+                databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Likes l = dataSnapshot.getValue(Likes.class);
+                        int cnt = l.getLikes();
+                        String lc = Integer.toString(cnt);
+                        likeText.setText(lc);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 setCurrentImage();
             }
         });

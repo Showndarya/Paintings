@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,9 +23,29 @@ public class Divine extends AppCompatActivity {
     private Integer images[] = {R.drawable.d1, R.drawable.d2, R.drawable.d3, R.drawable.d4, R.drawable.d5, R.drawable.d6, R.drawable.d7, R.drawable.d8,R.drawable.d9, R.drawable.d10, R.drawable.d11, R.drawable.d12, R.drawable.d13, R.drawable.d14};
     private int currImage = 0;
     Button like;
+    TextView likeText;
     AnimationDrawable animationDrawable;
     RelativeLayout relativeLayout;
     DatabaseReference databaseLikes;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final String id = Integer.toString(currImage);
+        databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Likes l = dataSnapshot.getValue(Likes.class);
+                int cnt = l.getLikes();
+                String lc = Integer.toString(cnt);
+                likeText.setText(lc);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +57,7 @@ public class Divine extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(5000);
         animationDrawable.setExitFadeDuration(2000);
         like = (Button) findViewById(R.id.like);
+        likeText = (TextView) findViewById(R.id.likeText);
 
         initializeImageSwitcher();
         setInitialImage();
@@ -59,6 +81,8 @@ public class Divine extends AppCompatActivity {
                         cnt = cnt + 1;
                         Likes likecnt = new Likes(cnt);
                         databaseLikes.child(id).setValue(likecnt);
+                        String lc = Integer.toString(cnt);
+                        likeText.setText(lc);
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -94,6 +118,21 @@ public class Divine extends AppCompatActivity {
                 if (currImage == 14) {
                     currImage = 0;
                 }
+                final String id = Integer.toString(currImage);
+                databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Likes l = dataSnapshot.getValue(Likes.class);
+                        int cnt = l.getLikes();
+                        String lc = Integer.toString(cnt);
+                        likeText.setText(lc);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 setCurrentImage();
             }
         });

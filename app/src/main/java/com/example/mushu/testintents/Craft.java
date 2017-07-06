@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,9 +23,29 @@ public class Craft extends AppCompatActivity {
     private Integer images[] = {R.drawable.c1, R.drawable.c2, R.drawable.c3};
     private int currImage = 0;
     Button like;
+    TextView likeText;
     AnimationDrawable animationDrawable;
     RelativeLayout relativeLayout;
     DatabaseReference databaseLikes;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final String id = Integer.toString(currImage);
+        databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Likes l = dataSnapshot.getValue(Likes.class);
+                int cnt = l.getLikes();
+                String lc = Integer.toString(cnt);
+                likeText.setText(lc);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +57,7 @@ public class Craft extends AppCompatActivity {
             animationDrawable.setEnterFadeDuration(5000);
             animationDrawable.setExitFadeDuration(2000);
             like = (Button) findViewById(R.id.like);
-
+            likeText = (TextView) findViewById(R.id.likeText);
             initializeImageSwitcher();
             setInitialImage();
             setImageRotateListener();
@@ -59,6 +80,8 @@ public class Craft extends AppCompatActivity {
                         cnt = cnt + 1;
                         Likes likecnt = new Likes(cnt);
                         databaseLikes.child(id).setValue(likecnt);
+                        String lc = Integer.toString(cnt);
+                        likeText.setText(lc);
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -93,6 +116,21 @@ public class Craft extends AppCompatActivity {
                     if (currImage == 3) {
                         currImage = 0;
                     }
+                    final String id = Integer.toString(currImage);
+                    databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Likes l = dataSnapshot.getValue(Likes.class);
+                            int cnt = l.getLikes();
+                            String lc = Integer.toString(cnt);
+                            likeText.setText(lc);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                     setCurrentImage();
                 }
             });
