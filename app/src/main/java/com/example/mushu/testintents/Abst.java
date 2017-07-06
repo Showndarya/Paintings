@@ -41,34 +41,15 @@ public class Abst extends AppCompatActivity {
             @Override
             public void onClick(View v) {
              final String id = Integer.toString(currImage);
-            /* databaseLikes.child("abstlikes").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-                  @Override
-                  public void onDataChange(DataSnapshot dataSnapshot) {
-                      Likes l = dataSnapshot.getValue(Likes.class);
-                      int likes = l.getLikes();
-                      likes++;
-                      Likes likesin = new Likes(likes);
-                      databaseLikes.child(id).setValue(likesin);
-                  }
-
-                  @Override
-                  public void onCancelled(DatabaseError databaseError) {
-
-                  }
-              });*/
                 databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                      //  for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                           // if(dataSnapshot.getKey()==id) {
                                 Likes l = dataSnapshot.getValue(Likes.class);
                                 int cnt = l.getLikes();
                                 cnt = cnt + 1;
                                 Likes likecnt = new Likes(cnt);
                                 databaseLikes.child(id).setValue(likecnt);
-                                //break;
-                            //}
-                        //}
+
                     }
 
                     @Override

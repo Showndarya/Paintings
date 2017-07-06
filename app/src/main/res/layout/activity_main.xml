@@ -18,8 +18,8 @@
         />
 
     <TextView
-        android:text="AMATURE PAINTINGS"
-        android:textColor="@color/blue"
+        android:text=" PAINTINGS"
+        android:textColor="?android:attr/colorPrimary"
         android:fontFamily="sans-serif-medium"
         android:textSize="28sp"
         android:layout_width="wrap_content"
@@ -33,39 +33,46 @@
 
     <Button
         android:text="CRAFT"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btncraft"
         android:layout_marginTop="33dp"
-        android:textColor="@color/colorPrimary"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="?attr/colorPrimary"
+        android:visibility="visible"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse" />
 
     <Button
         android:text="NATURE"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:id="@+id/btnnature"
-        android:textColor="@color/colorPrimary"
         android:layout_below="@+id/btncraft"
         android:layout_alignLeft="@+id/btncraft"
-        android:layout_alignStart="@+id/btncraft" />
+        android:layout_alignStart="@+id/btncraft"
+        android:background="?attr/colorButtonNormal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+        android:textColor="?attr/colorPrimary" />
 
     <Button
         android:text="ABSTRACT"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnabst"
-        android:textColor="@color/colorPrimary"
         android:layout_below="@+id/btnnature"
         android:layout_alignLeft="@+id/btnnature"
         android:layout_alignStart="@+id/btnnature"
-        android:layout_marginTop="19dp" />
+        android:layout_marginTop="19dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="?android:attr/colorPrimary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse" />
 
     <Button
         android:text="POTRAITS"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:id="@+id/btnpot"
@@ -76,12 +83,14 @@
 
     <Button
         android:text="DIVINE"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btndivine"
         android:layout_marginTop="19dp"
-        android:textColor="@color/colorPrimary"
         android:layout_below="@+id/btnpot"
         android:layout_alignLeft="@+id/btnpot"
-        android:layout_alignStart="@+id/btnpot" />
+        android:layout_alignStart="@+id/btnpot"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="?attr/colorPrimary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse" />
 </RelativeLayout>

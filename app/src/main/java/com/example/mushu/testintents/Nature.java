@@ -9,22 +9,58 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class Nature extends AppCompatActivity {
 
     private Integer images[] = {R.drawable.n1, R.drawable.n2, R.drawable.n3, R.drawable.n4, R.drawable.n5, R.drawable.n6, R.drawable.n7, R.drawable.n8, R.drawable.n9, R.drawable.n10, R.drawable.n11, R.drawable.n121, R.drawable.n122, R.drawable.n13, R.drawable.n14, R.drawable.n15, R.drawable.n16};
-
     private int currImage = 0;
+    Button like;
 
+    DatabaseReference databaseLikes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nature);
+        like = (Button) findViewById(R.id.like);
 
         initializeImageSwitcher();
         setInitialImage();
         setImageRotateListener();
 
+        setLike();
+        databaseLikes = FirebaseDatabase.getInstance().getReference("naturelikes");
+
+    }
+
+    private void setLike(){
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String id = Integer.toString(currImage);
+               databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Likes l = dataSnapshot.getValue(Likes.class);
+                        int cnt = l.getLikes();
+                        cnt = cnt + 1;
+                        Likes likecnt = new Likes(cnt);
+                        databaseLikes.child(id).setValue(likecnt);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                //Likes likesin = new Likes(2);
+                //databaseLikes.child(id).setValue(likesin);
+            }
+        });
     }
 
     private void initializeImageSwitcher() {

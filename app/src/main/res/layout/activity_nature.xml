@@ -20,10 +20,20 @@
 
     <Button
         android:id="@+id/btnRotateImage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Next Image"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Like"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/like"
+        android:layout_above="@+id/btnRotateImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp" />
+
 
 </RelativeLayout>

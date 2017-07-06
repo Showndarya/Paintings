@@ -9,20 +9,58 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class Divine extends AppCompatActivity {
 
     private Integer images[] = {R.drawable.d1, R.drawable.d2, R.drawable.d3, R.drawable.d4, R.drawable.d5, R.drawable.d6, R.drawable.d7, R.drawable.d8,R.drawable.d9, R.drawable.d10, R.drawable.d11, R.drawable.d12, R.drawable.d13, R.drawable.d14};
     private int currImage = 0;
+    Button like;
 
+    DatabaseReference databaseLikes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_divine);
+        like = (Button) findViewById(R.id.like);
+
         initializeImageSwitcher();
         setInitialImage();
         setImageRotateListener();
 
+        setLike();
+        databaseLikes = FirebaseDatabase.getInstance().getReference("divinelikes");
+
+    }
+
+    private void setLike(){
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String id = Integer.toString(currImage);
+              databaseLikes.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Likes l = dataSnapshot.getValue(Likes.class);
+                        int cnt = l.getLikes();
+                        cnt = cnt + 1;
+                        Likes likecnt = new Likes(cnt);
+                        databaseLikes.child(id).setValue(likecnt);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                //Likes likesin = new Likes(2);
+               // databaseLikes.child(id).setValue(likesin);
+            }
+        });
     }
 
     private void initializeImageSwitcher() {
