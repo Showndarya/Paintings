@@ -1,16 +1,14 @@
 package com.example.mushu.testintents;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,13 +22,19 @@ public class Craft extends AppCompatActivity {
     private Integer images[] = {R.drawable.c1, R.drawable.c2, R.drawable.c3};
     private int currImage = 0;
     Button like;
-
+    AnimationDrawable animationDrawable;
+    RelativeLayout relativeLayout;
     DatabaseReference databaseLikes;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_craft);
+
+            relativeLayout = (RelativeLayout)findViewById(R.id.content_craft);
+            animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+            animationDrawable.setEnterFadeDuration(5000);
+            animationDrawable.setExitFadeDuration(2000);
             like = (Button) findViewById(R.id.like);
 
             initializeImageSwitcher();
@@ -104,5 +108,18 @@ public class Craft extends AppCompatActivity {
             imageView.setImageResource(images[currImage]);
 
         }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animationDrawable != null && !animationDrawable.isRunning())
+            animationDrawable.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (animationDrawable != null && animationDrawable.isRunning())
+            animationDrawable.stop();
+    }
 
     }

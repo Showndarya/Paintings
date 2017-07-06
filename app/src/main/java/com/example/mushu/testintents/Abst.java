@@ -1,5 +1,6 @@
 package com.example.mushu.testintents;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,12 +22,19 @@ public class Abst extends AppCompatActivity {
     private Integer images[] = {R.drawable.a1, R.drawable.a2, R.drawable.a3,R.drawable.a4,R.drawable.a5};
     private int currImage = 0;
     Button like;
+    AnimationDrawable animationDrawable;
+    RelativeLayout relativeLayout;
 
     DatabaseReference databaseLikes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abst);
+        relativeLayout = (RelativeLayout)findViewById(R.id.activity_abst);
+        animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(2000);
+
         like = (Button) findViewById(R.id.like);
 
         initializeImageSwitcher();
@@ -104,6 +113,20 @@ public class Abst extends AppCompatActivity {
         final ImageSwitcher imageView = (ImageSwitcher) findViewById(R.id.imageSwitcher);
         imageView.setImageResource(images[currImage]);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animationDrawable != null && !animationDrawable.isRunning())
+            animationDrawable.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (animationDrawable != null && animationDrawable.isRunning())
+            animationDrawable.stop();
     }
 
 }

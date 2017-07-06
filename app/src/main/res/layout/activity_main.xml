@@ -9,88 +9,87 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.mushu.testintents.MainActivity"
-    android:background="@drawable/b1">
+    android:background="@drawable/animation_list">
 
     <TextView
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
-
-    <TextView
-        android:text=" PAINTINGS"
-        android:textColor="?android:attr/colorPrimary"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="28sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        />
-
-    <Button
-        android:text="CRAFT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btncraft"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:background="?attr/colorPrimary"
-        android:visibility="visible"
-        android:textAppearance="@style/TextAppearance.AppCompat.Inverse" />
-
-    <Button
-        android:text="NATURE"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:id="@+id/btnnature"
-        android:layout_below="@+id/btncraft"
-        android:layout_alignLeft="@+id/btncraft"
-        android:layout_alignStart="@+id/btncraft"
-        android:background="?attr/colorButtonNormal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-        android:textColor="?attr/colorPrimary" />
-
-    <Button
-        android:text="ABSTRACT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnabst"
-        android:layout_below="@+id/btnnature"
-        android:layout_alignLeft="@+id/btnnature"
-        android:layout_alignStart="@+id/btnnature"
-        android:layout_marginTop="19dp"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:background="?android:attr/colorPrimary"
-        android:textAppearance="@style/TextAppearance.AppCompat.Inverse" />
-
-    <Button
-        android:text="POTRAITS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:id="@+id/btnpot"
-        android:textColor="@color/colorPrimary"
-        android:layout_below="@+id/btnabst"
-        android:layout_alignLeft="@+id/btnabst"
-        android:layout_alignStart="@+id/btnabst" />
 
     <Button
         android:text="DIVINE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btndivine"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/btnpot"
-        android:layout_alignLeft="@+id/btnpot"
-        android:layout_alignStart="@+id/btnpot"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:background="?attr/colorPrimary"
-        android:textAppearance="@style/TextAppearance.AppCompat.Inverse" />
+        android:theme="@style/MyButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btnabst"
+        android:layout_alignStart="@+id/btnabst"
+        android:layout_marginBottom="58dp"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:text="POTRAIT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnpot"
+        android:theme="@style/MyButton"
+        android:layout_above="@+id/btndivine"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:text="NATURE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnnature"
+        android:background="@android:color/transparent"
+        android:theme="@style/MyButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btnabst"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:text="CRAFT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btncraft"
+        android:theme="@style/MyButton"
+        android:layout_above="@+id/btnnature"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:text="ABSTRACT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnabst"
+        android:theme="@style/MyButton"
+        android:layout_above="@+id/btndivine"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="46dp"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:text=" PAINTINGS"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="28sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:textColorHighlight="@android:color/white" />
 </RelativeLayout>

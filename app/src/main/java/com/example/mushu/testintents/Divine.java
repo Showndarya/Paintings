@@ -1,5 +1,6 @@
 package com.example.mushu.testintents;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,13 +22,19 @@ public class Divine extends AppCompatActivity {
     private Integer images[] = {R.drawable.d1, R.drawable.d2, R.drawable.d3, R.drawable.d4, R.drawable.d5, R.drawable.d6, R.drawable.d7, R.drawable.d8,R.drawable.d9, R.drawable.d10, R.drawable.d11, R.drawable.d12, R.drawable.d13, R.drawable.d14};
     private int currImage = 0;
     Button like;
-
+    AnimationDrawable animationDrawable;
+    RelativeLayout relativeLayout;
     DatabaseReference databaseLikes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_divine);
+
+        relativeLayout = (RelativeLayout)findViewById(R.id.activity_divine);
+        animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(2000);
         like = (Button) findViewById(R.id.like);
 
         initializeImageSwitcher();

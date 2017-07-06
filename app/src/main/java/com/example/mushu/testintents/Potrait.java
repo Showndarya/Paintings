@@ -1,5 +1,6 @@
 package com.example.mushu.testintents;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +22,8 @@ public class Potrait extends AppCompatActivity {
     private Integer images[] = {R.drawable.p1, R.drawable.p2, R.drawable.p3, R.drawable.p4, R.drawable.p5, R.drawable.p6, R.drawable.p7, R.drawable.p8,R.drawable.d9, R.drawable.p10, R.drawable.p11, R.drawable.p12};
     private int currImage = 0;
     Button like;
+    AnimationDrawable animationDrawable;
+    RelativeLayout relativeLayout;
 
     DatabaseReference databaseLikes;
 
@@ -27,6 +31,10 @@ public class Potrait extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_potrait);
+        relativeLayout = (RelativeLayout)findViewById(R.id.activity_potrait);
+        animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(2000);
         like = (Button) findViewById(R.id.like);
 
         initializeImageSwitcher();

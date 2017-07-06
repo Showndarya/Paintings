@@ -1,5 +1,6 @@
 package com.example.mushu.testintents;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,13 +22,18 @@ public class Nature extends AppCompatActivity {
     private Integer images[] = {R.drawable.n1, R.drawable.n2, R.drawable.n3, R.drawable.n4, R.drawable.n5, R.drawable.n6, R.drawable.n7, R.drawable.n8, R.drawable.n9, R.drawable.n10, R.drawable.n11, R.drawable.n121, R.drawable.n122, R.drawable.n13, R.drawable.n14, R.drawable.n15, R.drawable.n16};
     private int currImage = 0;
     Button like;
-
+    AnimationDrawable animationDrawable;
+    RelativeLayout relativeLayout;
     DatabaseReference databaseLikes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nature);
+        relativeLayout = (RelativeLayout)findViewById(R.id.activity_nature);
+        animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(2000);
         like = (Button) findViewById(R.id.like);
 
         initializeImageSwitcher();
