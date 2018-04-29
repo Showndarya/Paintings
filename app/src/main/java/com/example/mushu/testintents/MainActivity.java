@@ -36,35 +36,50 @@ public class MainActivity extends AppCompatActivity {
         btncraft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Craft.class);
+                Intent i = new Intent(MainActivity.this,DisplayImages.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id",0);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });
         btnnature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Nature.class);
+                Intent i = new Intent(MainActivity.this,DisplayImages.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id",1);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });
         btnabst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Abst.class);
+                Intent i = new Intent(MainActivity.this,DisplayImages.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id",2);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });
         btndivine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Divine.class);
+                Intent i = new Intent(MainActivity.this,DisplayImages.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id",3);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });
         btnpot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Potrait.class);
+                Intent i = new Intent(MainActivity.this,DisplayImages.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id",4);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });

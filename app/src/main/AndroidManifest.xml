@@ -33,15 +33,7 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Craft"
-            android:label="@string/title_activity_craft"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Craft$Craft" />
-        <activity android:name=".Nature" />
-        <activity android:name=".Abst" />
-        <activity android:name=".Divine" />
-        <activity android:name=".Potrait"></activity>
+        <activity android:name=".DisplayImages" />
     </application>
 
 </manifest>
